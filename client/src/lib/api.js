@@ -78,6 +78,13 @@ export const api = {
     const fd = new FormData();
     fd.append('file', file);
     return request('/bookings/upload', { method: 'POST', body: fd, auth: true, isForm: true });
+  },
+
+  // settings
+  uploadPortrait: (file) => {
+    const fd = new FormData();
+    fd.append('file', file);
+    return request('/settings/upload/portrait', { method: 'POST', body: fd, auth: true, isForm: true });
   }
 };
 

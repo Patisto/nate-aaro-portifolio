@@ -21,6 +21,7 @@ import AdminProjects from './admin/AdminProjects.jsx';
 import AdminBookings from './admin/AdminBookings.jsx';
 import AdminTestimonials from './admin/AdminTestimonials.jsx';
 import AdminServices from './admin/AdminServices.jsx';
+import AdminSettings from './admin/AdminSettings.jsx';
 
 export default function App() {
   const location = useLocation();
@@ -55,6 +56,7 @@ export default function App() {
             <Route path="bookings" element={<AdminBookings />} />
             <Route path="testimonials" element={<AdminTestimonials />} />
             <Route path="services" element={<AdminServices />} />
+            <Route path="settings" element={<AdminSettings />} />
           </Route>
         </Routes>
       </main>

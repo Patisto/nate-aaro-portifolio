@@ -1,6 +1,18 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 export default function About() {
+  const [portraitUrl, setPortraitUrl] = useState('');
+
+  useEffect(() => {
+    fetch('/api/settings')
+      .then((r) => r.json())
+      .then((s) => {
+        setPortraitUrl(s.portrait_url || '');
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <div>
       <section style={{ padding: '72px 0 0', borderBottom: '1px solid var(--border)' }}>
@@ -24,22 +36,34 @@ export default function About() {
           </div>
 
           <div>
-            {/* Placeholder portrait — replace with actual photo via CMS */}
-            <div style={{
-              width: '100%',
-              aspectRatio: '3/4',
-              background: 'linear-gradient(160deg, #1c1a16, #0a0a0c)',
-              border: '1px solid var(--border)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexDirection: 'column',
-              color: 'var(--muted)',
-              gap: 8
-            }}>
-              <span style={{ fontSize: '3rem' }}>🎬</span>
-              <span className="timecode">Portrait goes here</span>
-            </div>
+            {portraitUrl ? (
+              <img
+                src={portraitUrl}
+                alt="Aaron Nate_Aaro"
+                style={{
+                  width: '100%',
+                  aspectRatio: '3/4',
+                  objectFit: 'cover',
+                  border: '1px solid var(--border)'
+                }}
+              />
+            ) : (
+              <div style={{
+                width: '100%',
+                aspectRatio: '3/4',
+                background: 'linear-gradient(160deg, #1c1a16, #0a0a0c)',
+                border: '1px solid var(--border)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                color: 'var(--muted)',
+                gap: 8
+              }}>
+                <span style={{ fontSize: '3rem' }}>🎬</span>
+                <span className="timecode">Portrait goes here</span>
+              </div>
+            )}
           </div>
         </div>
       </section>

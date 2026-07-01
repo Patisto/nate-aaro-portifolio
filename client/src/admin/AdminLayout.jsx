@@ -5,7 +5,8 @@ const navItems = [
   { to: '/admin/projects', label: '🎬 Projects' },
   { to: '/admin/bookings', label: '📅 Bookings' },
   { to: '/admin/testimonials', label: '⭐ Testimonials' },
-  { to: '/admin/services', label: '💼 Services' }
+  { to: '/admin/services', label: '💼 Services' },
+  { to: '/admin/settings', label: '⚙️ Settings' }
 ];
 
 export default function AdminLayout() {

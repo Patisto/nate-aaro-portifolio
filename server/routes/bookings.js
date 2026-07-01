@@ -2,7 +2,7 @@ import { Router } from 'express';
 import crypto from 'crypto';
 import { query } from '../db.js';
 import { requireAuth } from '../middleware/auth.js';
-import { upload } from '../utils/upload.js';
+import { upload, uploadToSupabase } from '../utils/upload.js';
 
 const router = Router();
 
@@ -135,9 +135,14 @@ router.delete('/:id', requireAuth, async (req, res) => {
   res.json({ ok: true });
 });
 
-router.post('/upload', requireAuth, upload.single('file'), (req, res) => {
+router.post('/upload', requireAuth, upload.single('file'), async (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
-  res.json({ url: `/uploads/${req.file.filename}` });
+  try {
+    const url = await uploadToSupabase(req.file, 'bookings');
+    res.json({ url });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 export default router;

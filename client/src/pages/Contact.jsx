@@ -1,9 +1,21 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 export default function Contact() {
+  const [settings, setSettings] = useState({});
+
+  useEffect(() => {
+    fetch('/api/settings')
+      .then((r) => r.json())
+      .then((s) => {
+        setSettings(s);
+      })
+      .catch(() => {});
+  }, []);
+
   const contacts = [
-    { label: 'Email', value: 'mwayanganaaron@gmail.com', href: 'mailto:mwayanganaaron@gmail.com' },
-    { label: 'WhatsApp', value: '+265 000 000 000', href: 'https://wa.me/265000000000' },
+    { label: 'Email', value: settings.contact_email || 'mwayanganaaron@gmail.com', href: settings.contact_email ? `mailto:${settings.contact_email}` : 'mailto:mwayanganaaron@gmail.com' },
+    { label: 'WhatsApp', value: settings.whatsapp_number ? `+${settings.whatsapp_number.replace(/(\d{3})(\d{3})(\d{3})(\d{3})/, '$1 $2 $3 $4')}` : '+265 000 000 000', href: settings.whatsapp_number ? `https://wa.me/${settings.whatsapp_number}` : 'https://wa.me/265000000000' },
     { label: 'Instagram', value: '@Nate_aaro', href: 'https://instagram.com/nate_aaro' },
     { label: 'Facebook', value: 'Nate Aaro', href: 'https://facebook.com' },
     { label: 'TikTok', value: '@nate_aaro', href: 'https://tiktok.com/@nate_aaro' },

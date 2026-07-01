@@ -8,6 +8,7 @@ import projectRoutes from './routes/projects.js';
 import bookingRoutes from './routes/bookings.js';
 import testimonialRoutes from './routes/testimonials.js';
 import serviceRoutes from './routes/services.js';
+import settingsRoutes from './routes/settings.js';
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/testimonials', testimonialRoutes);
 app.use('/api/services', serviceRoutes);
+app.use('/api/settings', settingsRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err);
