@@ -1,4 +1,4 @@
-const BASE = import.meta.env.VITE_API_URL || '/api';
+const BASE = 'https://nate-aaro-portifolio.onrender.com/api';
 
 function getToken() {
   return localStorage.getItem('na_admin_token');
